@@ -6,7 +6,7 @@ const HEIGHT =  Symbol("HEIGT");
 const RECTANGLE = Symbol("RECTANGLE");
 const PPSC = Symbol("PPSC"); // parent pixel style controller
 const PSC = Symbol("PSC"); // pixel style conroller
-const RESIZE_LISTENER = Symbol("RESIZE_LISTENER");// window on resize callback
+
 
 class Rectangle{
   static checkIsNan(name,value){
@@ -105,6 +105,8 @@ class PixelStyleController{
       return 0;
     }else if(value.endsWith("px")){
       return Number.parseFloat(value.substring(0,value.length-2));
+    }else if(value === undefined){
+      return 0;
     }else{
       return Number.parseFloat(value);
     }
@@ -116,36 +118,43 @@ class PixelStyleController{
   set width(value){
     this[RECTANGLE].width = value;
     this.domElement.style.width = PixelStyleController.convertToPixels(value);
+    return this;
   }
   set height(value){
     this[RECTANGLE].height = value;
     this.domElement.style.height = PixelStyleController.convertToPixels(value);
+    return this;
   }
   set top(value){
     this[RECTANGLE].top = value;
     this.domElement.style.top = PixelStyleController.convertToPixels(value);
+    return this;
   }
   set left(value){
     this[RECTANGLE].left = value;
     this.domElement.style.left = PixelStyleController.convertToPixels(value);
+    return this;
   }
 
   setLocation(left,top){
     this[RECTANGLE].setLocation(left,top);
     this.left = left;
     this.top = top;
+    return this;
   }
 
   setSize(width,height){
     this[RECTANGLE].setSize(width,height);
     this.width = width;
     this.height = height;
+    return this;
   }
 
   move(x,y){
     this[RECTANGLE].move(x,y);
     this.left+=x;
     this.top+=y;
+    return this;
   }
 
   get width(){
@@ -196,42 +205,52 @@ class PercentStyleController{
     this[PSC] = psc;
     this[PPSC] = ppsc;
 
-    rectangle.width = this.pxWidth/this.widthPercentPixels;
-    rectangle.height = this.pxHeight/this.heightPercentPixels;
-    rectangle.left = this.pxLeft/this.widthPercentPixels;
-    rectangle.top = this.pxTop/this.heightPercentPixels;
+    if(this.widthPercentPixels !=0){
+      rectangle.width = this.pxWidth/this.widthPercentPixels;
+      rectangle.left = this.pxLeft/this.widthPercentPixels;
+    }
 
-    this.enableAutoResizeCalulation();
+    if(this.heightPercentPixels !=0){
+      rectangle.height = this.pxHeight/this.heightPercentPixels;
+      rectangle.top = this.pxTop/this.heightPercentPixels;
+    }
+
   }
 
   set width(value){
     this[RECTANGLE].width = value;
     this[PSC].width = value*this.widthPercentPixels;
+    return this;
   }
 
   set height(value){
     this[RECTANGLE].height = value;
     this[PSC].height = value*this.heightPercentPixels;
+    return this;
   }
 
   set top(value){
     this[RECTANGLE].top = value;
     this[PSC].top = value*this.heightPercentPixels;
+    return this;
   }
 
   set left(value){
     this[RECTANGLE].left = value;
     this[PSC].left = value*this.widthPercentPixels;
+    return this;
   }
 
   setLocation(left,top){
     this.left = left;
     this.top = top;
+    return this;
   }
 
   setSize(width,height){
     this.width = width;
     this.height = height;
+    return this;
   }
 
   get width(){
@@ -261,11 +280,13 @@ class PercentStyleController{
   setLocation(left,top){
     this[RECTANGLE].setLocation(left,top);
     this[PSC].setLocation(left*this.widthPercentPixels,top*this.heightPercentPixels);
+    return this;
   }
 
   setSize(width,height){
     this[RECTANGLE].setSize(width,height);
     this[PSC].setSize(width*this.widthPercentPixels,height*this.heightPercentPixels);
+    return this;
   }
 
   move(x,y){
@@ -273,21 +294,25 @@ class PercentStyleController{
     x = this[RECTANGLE].left;
     y = this[RECTANGLE].top;
     this[PSC].setLocation(x*this.widthPercentPixels,y*this.heightPercentPixels);
+    return this;
   }
 
   setPxLocation(left,top){
     this[PSC].setLocation(left,top);
     this[RECTANGLE].setLocation(left/this.widthPercentPixels,top/this.heightPercentPixels);
+    return this;
   }
 
   setPxSize(width,height){
     this[PSC].setSize(width,height);
     this[RECTANGLE].setSize(width/this.widthPercentPixels,height/this.heightPercentPixels);
+    return this;
   }
 
   pxMove(x,y){
     this[PSC].move(x,y);
     this[RECTANGLE].move(x/this.widthPercentPixels,y/this.heightPercentPixels);
+    return this;
   }
 
   get pxWidth(){
@@ -325,41 +350,31 @@ class PercentStyleController{
   set pxWidth(width){
     this[PSC].width = width;
     this[RECTANGLE].width = width/this.widthPercentPixels;
+    return this;
   }
 
   set pxHeight(height){
     this[PSC].height = height;
-    this[RECTANGLE].height = height/this.heightPercentPixels
+    this[RECTANGLE].height = height/this.heightPercentPixels;
+    return this;
   }
 
   set pxTop(top){
     this[PSC].top = top;
     this[RECTANGLE].top = top/this.heightPercentPixels;
+    return this;
   }
 
   set pxLeft(left){
     this[PSC].left = left;
     this[RECTANGLE].left = left/this.widthPercentPixels;
+    return this;
   }
 
   recalculatePixels(){
     this.setLocation(this.left,this.top);
     this.setSize(this.width,this.height);
-  }
-
-  enableAutoResizeCalulation(){
-    if(this[RESIZE_LISTENER]!==undefined){
-      return;
-    }
-    this[RESIZE_LISTENER]=()=>{
-     this.recalculatePixels();
-    };
-    window.addEventListener('resize',this[RESIZE_LISTENER]);
-  }
-
-  disableAutoResizeCalculation(){
-    window.removeEventListener(this[RESIZE_LISTENER]);
-    this[RESIZE_LISTENER]=undefined;
+    return this;
   }
 
   toString(){
