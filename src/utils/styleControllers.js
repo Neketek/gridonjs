@@ -6,7 +6,9 @@ const HEIGHT =  Symbol("HEIGT");
 const RECTANGLE = Symbol("RECTANGLE");
 const PPSC = Symbol("PPSC"); // parent pixel style controller
 const PSC = Symbol("PSC"); // pixel style conroller
-
+const CENTER_PIVOT_VERTICAL = Symbol("CENTER_PIVOT_VERTICAL");
+const CENTER_PIVOT_HORIZONTAL = Symbol("CENTER_PIVOT_HORIZONTAL");
+const GRID_LAYOUT = Symbol("GRID_LAYOUT");
 
 class Rectangle{
   static checkIsNan(name,value){
@@ -95,7 +97,6 @@ class Rectangle{
 
 
 class PixelStyleController{
-
   static convertToPixels(value){
       return `${value}px`;
   }
@@ -127,13 +128,52 @@ class PixelStyleController{
   }
   set top(value){
     this[RECTANGLE].top = value;
+    if(this.verticalPivotAtCenter){
+      value-=this.height/2;
+    }
     this.domElement.style.top = PixelStyleController.convertToPixels(value);
     return this;
   }
   set left(value){
     this[RECTANGLE].left = value;
+    if(this.horizontalPivotAtCenter){
+      value-=this.width/2;
+    }
     this.domElement.style.left = PixelStyleController.convertToPixels(value);
     return this;
+  }
+  //this changes standart pivot top left to pivot at center of the RECTANGLE(diags crossing)
+  set horizontalPivotAtCenter(centerPivot){
+    if(centerPivot){
+      this[CENTER_PIVOT_HORIZONTAL] = true;
+    }else{
+      this[CENTER_PIVOT_HORIZONTAL] = false;
+    }
+  }
+
+  get horizontalPivotAtCenter(){
+    return this[CENTER_PIVOT_HORIZONTAL];
+  }
+
+  set verticalPivotAtCenter(centerPivot){
+    if(centerPivot){
+      this[CENTER_PIVOT_VERTICAL] = true;
+    }else{
+      this[CENTER_PIVOT_VERTICAL] = false;
+    }
+  }
+
+  get verticalPivotAtCenter(){
+    return this[CENTER_PIVOT_VERTICAL];
+  }
+
+  set pivotAtCenter(centerPivot){
+    this.horizontalPivotAtCenter = centerPivot;
+    this.verticalPivotAtCenter = centerPivot;
+  }
+
+  get pivotAtCenter(){
+    return this.horizontalPivotAtCenter||this.verticalPivotAtCenter;
   }
 
   setLocation(left,top){
@@ -165,10 +205,16 @@ class PixelStyleController{
   }
   get top(){
     let value = this.domElement.style.top;
+    if(this.verticalPivotAtCenter){
+      value-=(this.height/2);
+    }
     return PixelStyleController.convertFromPixels(value);
   }
   get left(){
     let value = this.domElement.style.left;
+    if(this.horizontalPivotAtCenter){
+      value-=(this.width/2);
+    }
     return PixelStyleController.convertFromPixels(value);
   }
 
@@ -204,17 +250,32 @@ class PercentStyleController{
     this[RECTANGLE] = rectangle;
     this[PSC] = psc;
     this[PPSC] = ppsc;
+    this[GRID_LAYOUT] = undefined;
+    this.recalculatePercents();
+  }
 
-    if(this.widthPercentPixels !=0){
-      rectangle.width = this.pxWidth/this.widthPercentPixels;
-      rectangle.left = this.pxLeft/this.widthPercentPixels;
-    }
+  set pivotAtCenter(centerPivot){
+    this[PSC].pivotAtCenter = centerPivot;
+  }
 
-    if(this.heightPercentPixels !=0){
-      rectangle.height = this.pxHeight/this.heightPercentPixels;
-      rectangle.top = this.pxTop/this.heightPercentPixels;
-    }
+  get pivotAtCenter(){
+    return this[PSC].pivotAtCenter;
+  }
 
+  set horizontalPivotAtCenter(centerPivot){
+    this[PSC].horizontalPivotAtCenter = centerPivot;
+  }
+
+  set verticalPivotAtCenter(centerPivot){
+    this[PSC].verticalPivotAtCenter = centerPivot;
+  }
+
+  get verticalPivotAtCenter(){
+    return this[PSC].verticalPivotAtCenter;
+  }
+
+  get horizontalPivotAtCenter(){
+    return this[PSC].horizontalPivotAtCenter;
   }
 
   set width(value){
@@ -371,12 +432,25 @@ class PercentStyleController{
     return this;
   }
 
+
   recalculatePixels(){
     this.setLocation(this.left,this.top);
     this.setSize(this.width,this.height);
     return this;
   }
 
+  recalculatePercents(){
+    const rectangle = this[RECTANGLE];
+    if(this.widthPercentPixels!=0){
+      rectangle.width = this.pxWidth/this.widthPercentPixels;
+      rectangle.left = this.pxLeft/this.widthPercentPixels;
+    }
+
+    if(this.heightPercentPixels!=0){
+      rectangle.height = this.pxHeight/this.heightPercentPixels;
+      rectangle.top = this.pxTop/this.heightPercentPixels;
+    }
+  }
   toString(){
     return this[RECTANGLE].toString();
   }

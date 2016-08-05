@@ -27,9 +27,9 @@ body{
   width:400px;
 }
 .abs{
-  
+
   border-color:black;
   border-width: medium;
-  border-style: dotted;
-  position: absolute;
+  /*border-style: dotted;
+  position: absolute;*/
 }
