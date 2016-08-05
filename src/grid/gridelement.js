@@ -63,3 +63,5 @@ class GridElement{
   }
 
 }
+
+module.exports = {GridElement};

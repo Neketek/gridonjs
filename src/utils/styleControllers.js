@@ -8,7 +8,6 @@ const PPSC = Symbol("PPSC"); // parent pixel style controller
 const PSC = Symbol("PSC"); // pixel style conroller
 const CENTER_PIVOT_VERTICAL = Symbol("CENTER_PIVOT_VERTICAL");
 const CENTER_PIVOT_HORIZONTAL = Symbol("CENTER_PIVOT_HORIZONTAL");
-const GRID_LAYOUT = Symbol("GRID_LAYOUT");
 
 class Rectangle{
   static checkIsNan(name,value){
@@ -250,7 +249,6 @@ class PercentStyleController{
     this[RECTANGLE] = rectangle;
     this[PSC] = psc;
     this[PPSC] = ppsc;
-    this[GRID_LAYOUT] = undefined;
     this.recalculatePercents();
   }
 
