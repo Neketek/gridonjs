@@ -2,19 +2,23 @@ const GridElement = require("./gridelement.js").GridElement;
 
 const GRID_LAYOUT = Symbol("GRID_LAYOUT");
 const ELEM_MAP = Symbol("ELEM_MAP");
-const ID = Symbol("ID");
+const DOM_ELEMENT = Symbol("DOM_ELEMENT");
 
 
 class Grid{
 
-  constructor(id,cols=10,rows=10){
+  constructor(domElement,cols=10,rows=10){
     this[GRID_LAYOUT]={rows:rows,cols:cols};
     this[ELEM_MAP]=new Map();
-    this[ID]=id;
+    this[DOM_ELEMENT]=domElement;
+  }
+
+  get domElement(){
+    return this[DOM_ELEMENT];
   }
 
   get id(){
-    return this[ID];
+    return this[DOM_ELEMENT].id;
   }
 
   set cols(cols){
@@ -61,6 +65,20 @@ class Grid{
     str+="\n}";
     return str;
   }
+
+  transformOneByParamList(params){
+    const elem = this.get(params[0]);
+    if(elem!==undefined){
+      elem.transform(params[1],params[2],params[3],params[4]);
+    }
+  }
+
+  transformManyByParamLists(list){
+    for(const params of list){
+      this.transformOneByParamList(params);
+    }
+  }
+
 }
 
 module.exports = {Grid};
