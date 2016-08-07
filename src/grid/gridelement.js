@@ -8,6 +8,9 @@ const PSC = Symbol("PSC");
 
 class GridElement{
   static checkGridLayoutObject(gridLayoutObject){
+    if(gridLayoutObject===undefined){
+      return;
+    }
     const props = ["rows","cols"];
     for(const prop of props){
       if(gridLayoutObject[prop]===undefined){
@@ -75,6 +78,10 @@ class GridElement{
 
   transformByObject(object){
     this.transform(object.left,object.top,object.width,object.height);
+  }
+
+  toString(){
+    return this[RECT].toString();
   }
 }
 

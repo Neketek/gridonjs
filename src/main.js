@@ -1,16 +1,15 @@
 const GridElement = require("./grid/gridelement.js").GridElement;
-
+const Grid = require("./grid/grid.js").Grid;
 const dom = document.getElementById("test-0");
 
 
 const ge = new GridElement(dom);
-const gl = {
-  rows:10,
-  cols:10
-};
-ge.layout = gl;
-ge.psc.pivotAtCenter = true;
-ge.width = 10;
-ge.height = 5;
-ge.top = 0;
-ge.left = 0;
+const grid = new Grid("TEST");
+
+
+grid.add("1",ge);
+
+ge.transform(5,5,5,5);
+ge.transformByList([0,0,2,2]);
+
+console.log(grid.toString());
