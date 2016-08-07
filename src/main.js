@@ -10,7 +10,7 @@ const gl = {
 };
 ge.layout = gl;
 ge.psc.pivotAtCenter = true;
-ge.width = 5;
+ge.width = 10;
 ge.height = 5;
-ge.top = 5;
-ge.left = 5;
+ge.top = 0;
+ge.left = 0;

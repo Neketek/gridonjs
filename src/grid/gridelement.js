@@ -62,6 +62,20 @@ class GridElement{
     this.psc.left = this.colPercents*left;
   }
 
+  transform(left,top,width,height){
+    this.left = left;
+    this.top = top;
+    this.width = width;
+    this.height = height;
+  }
+
+  transformByList(list){
+    this.transform(list[0],list[1],list[2],list[3]);
+  }
+
+  transformByObject(object){
+    this.transform(object.left,object.top,object.width,object.height);
+  }
 }
 
 module.exports = {GridElement};
