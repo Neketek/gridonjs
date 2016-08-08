@@ -6,7 +6,6 @@ const GRIDONJS_CONTAINER_CLASS = GRIDONJS_PREFIX+"-c";
 const GRIDONJS_ELEMENT_CLASS = GRIDONJS_PREFIX+"-e";
 
 class Utils{
-
   static createGojsElementsFromDom(list,ClassObject){
     const res = new Array();
     for(const element of list){
@@ -28,12 +27,14 @@ class Utils{
   }
 
   static getGridElementsFrom(rootDomElement,className){
-    const domElements = rootDomElement.getElementsByClassName(className);
+    let domElements = null;
     switch(className){
       case GRIDONJS_ELEMENT_CLASS:
+        domElements = rootDomElement.children;
         return Utils.createGojsElementsFromDom(domElements,GridElement);
       break;
       case GRIDONJS_CONTAINER_CLASS:
+        domElements = rootDomElement.getElementsByClassName(className);
         return Utils.createGojsElementsFromDom(domElements,Grid);
       break;
       default:

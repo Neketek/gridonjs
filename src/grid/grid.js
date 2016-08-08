@@ -5,7 +5,7 @@ const PercentStyleController = require("../utils/styleControllers.js").PercentSt
 const GRID_LAYOUT = Symbol("GRID_LAYOUT");
 const ELEM_MAP = Symbol("ELEM_MAP");
 const DOM_ELEMENT = Symbol("DOM_ELEMENT");
-const PSC = Symbol("PSC");
+//const PSC = Symbol("PSC");
 const STATIC_GRIDS_MAP = Symbol("STATIC_GRIDS_MAP");
 
 
@@ -22,14 +22,14 @@ class Grid{
     this[GRID_LAYOUT]={rows:rows,cols:cols};
     this[ELEM_MAP]=new Map();
     this[DOM_ELEMENT]=domElement;
-    this[PSC]=new PercentStyleController(domElement,false,false);
-    
+    //this[PSC]=new PercentStyleController(domElement,false,false);
+
     Grid.gridsMap.set(domElement.id,this);
   }
 
-  get psc(){
-    return this[PSC];
-  }
+  // get psc(){
+  //   return this[PSC];
+  // }
 
   get domElement(){
     return this[DOM_ELEMENT];
@@ -85,8 +85,10 @@ class Grid{
   }
 
   transformOneByParamList(params){
+
     const elem = this.get(params[0]);
     if(elem!==undefined){
+      
       elem.transform(params[1],params[2],params[3],params[4]);
     }
   }
