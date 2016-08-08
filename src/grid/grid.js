@@ -22,11 +22,9 @@ class Grid{
     this[GRID_LAYOUT]={rows:rows,cols:cols};
     this[ELEM_MAP]=new Map();
     this[DOM_ELEMENT]=domElement;
-    this[PSC]=new PercentStyleController(domElement);
-
+    this[PSC]=new PercentStyleController(domElement,false,false);
+    
     Grid.gridsMap.set(domElement.id,this);
-
-    console.log(Grid.gridsMap);
   }
 
   get psc(){

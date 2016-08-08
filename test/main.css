@@ -1,20 +1,5 @@
-#test-0{
-  background-color: blue;
-  position: absolute;
-  /*border-radius: 100%;*/
-}
-body{
-  width: 100%;
-  height: 100%;
-}
-.test-content{
-  display: inline-block;
-  background-color: green;
-  width: 10%;
-  height: 10%;
-}
 .container{
-  position: absolute;
+  position:inherit;
   background-color: darkgray;
   top:25%;
   left:25%;
@@ -22,9 +7,9 @@ body{
   width:400px;
 }
 .abs{
-
   background-color:blue;
-  position: absolute;
-  /*border-style: dotted;
-  position: absolute;*/
+}
+
+body{
+  margin: 0;
 }

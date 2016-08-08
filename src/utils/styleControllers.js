@@ -100,6 +100,16 @@ class PixelStyleController{
       return `${value}px`;
   }
 
+  set cssPosition(value){
+    if(this.cssPosition!=value){
+      this.domElement.style.position = value;
+    }
+  }
+
+  get cssPosition(){
+    return this.domElement.style.position;
+  }
+
   static convertFromPixels(value){
     if(value.length==0){
       return 0;
@@ -242,14 +252,29 @@ class PixelStyleController{
 
 class PercentStyleController{
 
-  constructor(domElement){
+  constructor(domElement,recalculatePercents=true,resetCss=true){
     let psc = new PixelStyleController(domElement);
     let ppsc = new PixelStyleController(domElement.parentElement);
     let rectangle = new Rectangle();
     this[RECTANGLE] = rectangle;
     this[PSC] = psc;
     this[PPSC] = ppsc;
-    this.recalculatePercents();
+    if(recalculatePercents){
+      this.recalculatePercents();
+    }
+    if(resetCss){
+      psc.cssPosition = "absolute";
+      psc.domElement.style.margin = 0;
+      psc.domElement.style.padding = 0;
+    }
+  }
+
+  get cssPosition(){
+    return this[PSC].cssPosition;
+  }
+
+  set cssPosition(value){
+    this[PSC].cssPosition = value;
   }
 
   set pivotAtCenter(centerPivot){
