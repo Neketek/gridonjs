@@ -1,16 +1,36 @@
 const GridElement = require("./gridelement.js").GridElement;
+const PercentStyleController = require("../utils/styleControllers.js").PercentStyleController;
+
 
 const GRID_LAYOUT = Symbol("GRID_LAYOUT");
 const ELEM_MAP = Symbol("ELEM_MAP");
 const DOM_ELEMENT = Symbol("DOM_ELEMENT");
+const PSC = Symbol("PSC");
+const STATIC_GRIDS_MAP = Symbol("STATIC_GRIDS_MAP");
 
 
 class Grid{
+
+  static get gridsMap(){
+    if(Grid[STATIC_GRIDS_MAP]===undefined){
+      Grid[STATIC_GRIDS_MAP] = new Map();
+    }
+    return Grid[STATIC_GRIDS_MAP];
+  }
 
   constructor(domElement,cols=10,rows=10){
     this[GRID_LAYOUT]={rows:rows,cols:cols};
     this[ELEM_MAP]=new Map();
     this[DOM_ELEMENT]=domElement;
+    this[PSC]=new PercentStyleController(domElement);
+
+    Grid.gridsMap.set(domElement.id,this);
+
+    console.log(Grid.gridsMap);
+  }
+
+  get psc(){
+    return this[PSC];
   }
 
   get domElement(){

@@ -4,6 +4,7 @@ const Rectangle = require("../utils/styleControllers").Rectangle;
 const RECT = Symbol("RECT");
 const GRID_LAYOUT = Symbol("GRID_LAYOUT");
 const PSC = Symbol("PSC");
+const DOM_ELEMENT = Symbol("DOM_ELEMENT");
 
 
 class GridElement{
@@ -22,6 +23,11 @@ class GridElement{
   constructor(domElement){
     this[PSC] = new PercentStyleController(domElement);
     this[RECT] = new Rectangle();
+    this[DOM_ELEMENT] = domElement;
+  }
+
+  get id(){
+    return this[DOM_ELEMENT].id;
   }
 
   set layout(gridLayout){
