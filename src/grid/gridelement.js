@@ -26,6 +26,9 @@ class GridElement{
     this[DOM_ELEMENT] = domElement;
   }
 
+  get domElement(){
+    return this[DOM_ELEMENT];
+  }
   get id(){
     return this[DOM_ELEMENT].id;
   }

@@ -6,64 +6,77 @@ const GRIDONJS_CONTAINER_CLASS = GRIDONJS_PREFIX+"-c";
 const GRIDONJS_ELEMENT_CLASS = GRIDONJS_PREFIX+"-e";
 
 class Utils{
-  static filterGridsAlreadyExistsForDom(domElements){
-    function predicate(value){
+
+  static setGridOnJsElements(domList,ClassObject,map){
+    for(const element of domList){
+      map.set(element.id,new ClassObject(element));
+    }
+  }
+
+  static findGridContainersDomAtRoot(domElement){
+    return domElement.getElementsByClassName(GRIDONJS_CONTAINER_CLASS);
+  }
+
+  static findGridElementsDomAtRoot(domElement){
+    const result = new Array();
+    for(const element of domElement.children){
+      result.push(element);
+    }
+    return result;
+  }
+
+
+  static filterNewGridContainersDom(domElements){
+
+    function predicate(domElement){
       for(const kv of Grid.gridsMap){
-        if(kv[1]===value){
-          return kv[0];
+        if(kv[1].domElement === domElement){
+          return false;
         }
       }
-      return undefined;
+      return true;
     }
-    return domElements.filter(predicate);
-  }
 
-  static isDomInGrid(grid,domElement){
-    for(const kv of grid.elementsMap){
-      if(kv[1].domElement === domElement){
-        return true;
+    const filtered = new Array();
+    for(const element of domElements){
+      if(predicate(element)){
+        filtered.push(element);
       }
     }
-    return false;
+    console.log(filtered);
+    return filtered;
+
   }
 
-  static createGojsElementsFromDom(list,ClassObject){
-    const res = new Array();
-    for(const element of list){
-      res.push(new ClassObject(element));
-    }
-    return res;
-  }
-
-  static addAllToGridsMap(list){
-    for(const grid of list){
-      Grid.gridsMap.set(grid.id,grid);
-    }
-  }
-
-  static addAllElementsToGridObject(grid,list){
-    for(const element of list){
-      grid.add(id,element);
-    }
-  }
-
-  static getGridElementsFrom(rootDomElement,className){
-    let domElements = null;
-    switch(className){
-      case GRIDONJS_ELEMENT_CLASS:
-        domElements = rootDomElement.children;
-        return domElements;
-      break;
-      case GRIDONJS_CONTAINER_CLASS:
-        domElements = rootDomElement.getElementsByClassName(className);
-        domElements = Utils.filterGridsAlreadyExistsForDom(domElements);
-        return domElements;
-      break;
-      default:
-        throw "Unknown className";
+  static addGridElementsDomToGrid(grid,domElements){
+    console.log("GRID:"+grid.id);
+    for(const domElement of domElements){
+      let idInGrid = grid.getIdOfDomElement(domElement);
+      if(idInGrid===undefined){
+        //just sets new Element
+        grid.set(domElement.id,new GridElement(domElement));
+      }else{
+        if(idInGrid!=domElement.id){
+          //removes from old key-value and set to new key value
+          const gridElement=grid.delete(idInGrid);
+          grid.set(domElement.id,gridElement);
+        }
+      }
     }
   }
 
+  static autodiscover(){
+    let gridDomElements = Utils.findGridContainersDomAtRoot(document);
+    gridDomElements = Utils.filterNewGridContainersDom(gridDomElements);
+    Utils.setGridOnJsElements(gridDomElements,Grid,Grid.gridsMap);
+    let grid = null;
+    let gridElementsDom = null;
+    for(const kv of Grid.gridsMap){
+      grid = kv[1];
+      gridElementsDom = Utils.findGridElementsDomAtRoot(grid.domElement);
+      Utils.addGridElementsDomToGrid(grid,gridElementsDom);
+    }
+  }
 }
 
 module.exports = {Utils,GRIDONJS_ELEMENT_CLASS,GRIDONJS_CONTAINER_CLASS};

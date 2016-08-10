@@ -66,6 +66,17 @@ class Grid{
   has(id){
     return this.get(id)!==undefined;
   }
+
+  getIdOfDomElement(domElement){
+    const elementsMap = this[ELEM_MAP];
+    for(const kv of elementsMap){
+      if(kv[1].domElement===domElement){
+        return kv[0];
+      }
+    }
+    return undefined;
+  }
+
   delete(id){
     element = this.get(id);
     if(element!==undefined){
