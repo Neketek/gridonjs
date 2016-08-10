@@ -55,7 +55,7 @@ class Grid{
     return this[GRID_LAYOUT].rows;
   }
 
-  add(id,element){
+  set(id,element){
     element.layout=this[GRID_LAYOUT];
     this[ELEM_MAP].set(id,element);
   }

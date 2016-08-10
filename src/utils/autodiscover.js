@@ -7,22 +7,26 @@ const GRIDONJS_ELEMENT_CLASS = GRIDONJS_PREFIX+"-e";
 
 class Utils{
   static filterGridsAlreadyExistsForDom(domElements){
-    const filtered = new Array();
-    for(const element of domElements){
-      let hasGridForDom = false;
-      for(let grid of Grid.gridsMap){
-        if(grid[1].domElement===element){
-          console.log("M:"+element.id);
-          hasGridForDom = true;
-          break;
+    function predicate(value){
+      for(const kv of Grid.gridsMap){
+        if(kv[1]===value){
+          return kv[0];
         }
       }
-      if(!hasGridForDom){
-        filtered.push(element);
+      return undefined;
+    }
+    return domElements.filter(predicate);
+  }
+
+  static isDomInGrid(grid,domElement){
+    for(const kv of grid.elementsMap){
+      if(kv[1].domElement === domElement){
+        return true;
       }
     }
-    return filtered;
+    return false;
   }
+
   static createGojsElementsFromDom(list,ClassObject){
     const res = new Array();
     for(const element of list){
@@ -48,12 +52,12 @@ class Utils{
     switch(className){
       case GRIDONJS_ELEMENT_CLASS:
         domElements = rootDomElement.children;
-        return Utils.createGojsElementsFromDom(domElements,GridElement);//TODO: fix filter before creation of gojs elements
+        return domElements;
       break;
       case GRIDONJS_CONTAINER_CLASS:
         domElements = rootDomElement.getElementsByClassName(className);
         domElements = Utils.filterGridsAlreadyExistsForDom(domElements);
-        return Utils.createGojsElementsFromDom(domElements,Grid);
+        return domElements;
       break;
       default:
         throw "Unknown className";
