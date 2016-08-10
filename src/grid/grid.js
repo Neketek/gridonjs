@@ -63,7 +63,9 @@ class Grid{
   get(id){
     return this[ELEM_MAP].get(id);
   }
-
+  has(id){
+    return this.get(id)!==undefined;
+  }
   delete(id){
     element = this.get(id);
     if(element!==undefined){
@@ -88,7 +90,7 @@ class Grid{
 
     const elem = this.get(params[0]);
     if(elem!==undefined){
-      
+
       elem.transform(params[1],params[2],params[3],params[4]);
     }
   }

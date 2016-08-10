@@ -20,3 +20,5 @@ GridOnJs.get("grid-2").transformManyByParamLists([
   ["test-2",0,9,1,1],
   ["grid-2",3,3,4,4]
 ]);
+
+GridOnJs.autodiscover();

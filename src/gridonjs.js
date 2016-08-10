@@ -17,8 +17,12 @@ class GridOnJs{
     ADUtils.addAllToGridsMap(grids);
     for(const grid of grids){
       const elements = ADUtils.getGridElementsFrom(grid.domElement,GRIDONJS_ELEMENT_CLASS);
-      for(const element of elements){
-        grid.add(element.id,element);
+      for(const element of elements){//TODO:think about this functionality
+        if(!grid.has(element.id)){
+          grid.add(element.id,element);
+        }else{
+          
+        }
       }
     }
   }
