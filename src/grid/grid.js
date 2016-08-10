@@ -98,10 +98,8 @@ class Grid{
   }
 
   transformOneByParamList(params){
-
     const elem = this.get(params[0]);
     if(elem!==undefined){
-
       elem.transform(params[1],params[2],params[3],params[4]);
     }
   }
@@ -112,6 +110,12 @@ class Grid{
     }
   }
 
+  recalulatePixels(){
+    const elementsMap = this[ELEM_MAP];
+    for(const kv of elementsMap){
+      kv[1].recalulatePixelsAsGridElement();
+    }
+  }
 }
 
 module.exports = {Grid};

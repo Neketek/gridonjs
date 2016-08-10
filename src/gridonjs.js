@@ -18,4 +18,6 @@ class GridOnJs{
   }
 }
 
+window.GridOnJs = GridOnJs;
+
 module.exports = {GridOnJs};

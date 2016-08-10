@@ -1,0 +1,16 @@
+body{
+  margin: 0;
+  background-color:#263238;
+}
+#footer{
+  background-color: #212121;
+}
+#title{
+  background-color: #212121;
+}
+#content{
+  background-color: #E0E0E0;
+}
+#login{
+  background-color: #607D8B;
+}

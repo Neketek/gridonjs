@@ -74,6 +74,22 @@ class GridElement{
     this.psc.left = this.colPercents*left;
   }
 
+  get left(){
+    return this[RECT].left;
+  }
+
+  get top(){
+    return this[RECT].top;
+  }
+
+  get width(){
+    return this[RECT].width;
+  }
+
+  get height(){
+    return this[RECT].height;
+  }
+  
   transform(left,top,width,height){
     this.left = left;
     this.top = top;
@@ -87,6 +103,13 @@ class GridElement{
 
   transformByObject(object){
     this.transform(object.left,object.top,object.width,object.height);
+  }
+
+  recalulatePixelsAsGridElement(){
+    this.left = this.left;
+    this.top = this.top;
+    this.width = this.width;
+    this.height = this.height;
   }
 
   toString(){

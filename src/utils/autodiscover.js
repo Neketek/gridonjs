@@ -20,7 +20,9 @@ class Utils{
   static findGridElementsDomAtRoot(domElement){
     const result = new Array();
     for(const element of domElement.children){
-      result.push(element);
+      if(element.classList.contains(GRIDONJS_ELEMENT_CLASS)){
+        result.push(element);
+      }
     }
     return result;
   }
@@ -43,13 +45,11 @@ class Utils{
         filtered.push(element);
       }
     }
-    console.log(filtered);
     return filtered;
 
   }
 
   static addGridElementsDomToGrid(grid,domElements){
-    console.log("GRID:"+grid.id);
     for(const domElement of domElements){
       let idInGrid = grid.getIdOfDomElement(domElement);
       if(idInGrid===undefined){
