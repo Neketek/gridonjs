@@ -2,10 +2,11 @@ var path = require('path');
 
 module.exports = {
     entry: {
-      gridonjs:"./src/gridonjs.js"
+      "/build/gridonjs":"./src/gridonjs.js",
+      "/examples/gridonjs":"./src/gridonjs.js"
     },
     output: {
-        path: path.join(__dirname,"build"),
+        path:__dirname,
         filename: "[name].min.js"
     },
     module: {

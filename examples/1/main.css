@@ -1,6 +1,8 @@
-body{
+#root{
   margin: 0;
   background-color:#263238;
+  width: 100%;
+  height: 100%;
 }
 #footer{
   background-color: #212121;
@@ -11,9 +13,18 @@ body{
 #content{
   background-color: #E0E0E0;
 }
+#content-box{
+  background-color:#BDBDBD;
+}
 #login{
   background-color: #607D8B;
 }
 #login-button{
   background-color:#263238;
+}
+
+.block{
+
+  margin:5%;
+  background-color: white;
 }

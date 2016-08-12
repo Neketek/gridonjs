@@ -109,7 +109,18 @@ class Grid{
       this.transformOneByParamList(params);
     }
   }
-
+  //universal transform method
+  transform(object){
+    if(object.rows!==undefined){
+      this.rows = object.rows;
+    }
+    if(object.cols!==undefined){
+      this.cols = object.cols;
+    }
+    if(object.layout!==undefined){
+      this.transformManyByParamLists(object.layout);
+    }
+  }
   recalulatePixels(){
     const elementsMap = this[ELEM_MAP];
     for(const kv of elementsMap){
