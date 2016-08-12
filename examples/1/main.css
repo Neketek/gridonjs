@@ -24,7 +24,14 @@
 }
 
 .block{
-
   margin:5%;
-  background-color: white;
+  background-color:#9E9E9E;
+}
+
+img{
+  position:absolute;
+  width: 60%;
+  height: 90%;
+  left:20%;
+  top:5%;
 }
