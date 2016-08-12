@@ -2,8 +2,6 @@ var GridOnJs = window.GridOnJs;
 var Layout = window.GridOnJs.Layout;
 GridOnJs.autodiscover();
 
-
-
 var layout32x18 ={
   rows:18,
   cols:32,
@@ -36,22 +34,21 @@ function transform(){
   GridOnJs.get("root").transform(layout);
   GridOnJs.get("main").transform(layout32x18);
   GridOnJs.get("login").transform(loginLayout50x50);
-  //GridOnJs.get("content").transform(contentLayout20x10);
 }
 
 transform();
 
 var layoutConfig = {
-  grid:GridOnJs.get("content"),
-  w:24,
-  h:22,
-  ml:1,
-  mt:0.5,
-  hor:false,
-  rows:50,
-  cols:80,
-  pt:2,
-  pl:2
+  grid:GridOnJs.get("content"),// grid object
+  w:40, //width of element
+  h:22, //heigth of element
+  ml:1, //margin left
+  mt:1,//margin top
+  hor:true,//is horizontal owerflow
+  rows:50,//grid rows
+  cols:80,//grid cols
+  pt:1,//padding top
+  pl:0 //padding left
 
 }
 

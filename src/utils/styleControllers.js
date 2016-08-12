@@ -121,6 +121,16 @@ class PixelStyleController{
       return Number.parseFloat(value);
     }
   }
+
+  //TODO: Hotfix of the bug with clientWidth and clientHeight
+  static convertWHFromPixels(value){
+    if(value === undefined||value.length==0){
+      throw -1;
+    }else if(value.endsWith("px")){
+      return Number.parseFloat(value.substring(0,value.length-2));
+    }//neet to throw error "%" to calculate value using parent pixel style controller in percent style controller
+    throw -2;
+  }
   constructor(domElement){
     this.domElement = domElement;
     this[RECTANGLE] = new Rectangle(this.left,this.top,this.width,this.height);
@@ -207,10 +217,20 @@ class PixelStyleController{
   }
 
   get width(){
-    return this.domElement.clientWidth;
+    try{
+      //TODO:Hotfix
+      return PixelStyleController.convertWHFromPixels(this.domElement.style.width);
+    }catch(error){
+      return this.domElement.clientWidth;
+    }
   }
   get height(){
-    return this.domElement.clientHeight;
+    try{
+      //TODO:Hotfix
+      return PixelStyleController.convertWHFromPixels(this.domElement.style.height);
+    }catch(error){
+      return this.domElement.clientHeight;
+    }
   }
   get top(){
     let value = this.domElement.style.top;

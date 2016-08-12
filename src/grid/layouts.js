@@ -15,7 +15,6 @@ class Layout{
 
   }
   update(){
-    //return;
     if(!this.grid)return;
     this.grid.rows = this.rows;
     this.grid.cols = this.cols;
@@ -31,28 +30,35 @@ class Layout{
     if(!this.ids){
       ids = this.grid.ids;
     }
+    const createSingleTransform = (l,t)=>{
+      let left = this.pl+this.ml+(this.w+this.ml)*l;
+      let top = this.pt+this.mt+(this.h+this.mt)*t;
+      let id = ids.next().value;
+      if(id===undefined){
+        return true;
+      }
+      layout.push([id,left,top,this.w,this.h]);
+      return false;
+    };
+
     if(this.hor){
-      //TODO: for horizontal fill
+      for(let l = 0;!done;l++){
+        for(let t = 0;t<elementsInRows;t++){
+          done = createSingleTransform(l,t);
+        }
+      }
     }else{
       for(let t = 0;!done;t++){
         for(let l = 0;l<elementsInCols;l++){
-          let left = this.pl+this.ml+(this.w+this.ml)*l;
-          let top = this.pt+this.mt+(this.h+this.mt)*t;
-          let id = ids.next().value;
-          if(id===undefined){
-            done = true;
-            break;
-          }
-          layout.push([id,left,top,this.w,this.h]);
+          done = createSingleTransform(l,t);
         }
       }
-
     }
 
     const transform = {
       layout:layout
     };
-    console.log(layout);
+
     this.grid.transform(transform);
 
   }
