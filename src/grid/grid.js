@@ -24,13 +24,13 @@ class Grid{
     this[ELEM_MAP]=new Map();
     this[TRANSFORMS_LIST] = new Map();
     this[DOM_ELEMENT]=domElement;
-    //this[PSC]=new PercentStyleController(domElement,false,false);
+    this[Symbol.iterator]=this[ELEM_MAP][Symbol.iterator];
     Grid.gridsMap.set(domElement.id,this);
   }
 
-  // get psc(){
-  //   return this[PSC];
-  // }
+  forEach(callback){
+    this[ELEM_MAP].forEach(callback);
+  }
 
   get transormsList(){
     return this[TRANSFORMS_LIST];
@@ -130,7 +130,7 @@ class Grid{
   applyTransfromsByConditions(){
     const transforms = this.transormsList;
     for(const transform of transforms){
-      if(transform.condition()){
+      if(transform.condition!==undefined&&transform.condition()){
         this.transform(transform);
       }
     }
