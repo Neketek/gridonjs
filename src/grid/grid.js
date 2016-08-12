@@ -32,6 +32,10 @@ class Grid{
     this[ELEM_MAP].forEach(callback);
   }
 
+  get ids(){
+    return this[ELEM_MAP].keys();
+  }
+  
   get transormsList(){
     return this[TRANSFORMS_LIST];
   }

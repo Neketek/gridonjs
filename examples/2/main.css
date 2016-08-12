@@ -12,6 +12,7 @@
 }
 #content{
   background-color: #E0E0E0;
+  /*overflow-y:scroll;*/
 }
 #content-box{
   background-color:#BDBDBD;
