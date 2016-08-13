@@ -2,23 +2,36 @@ const ADUtils = require("./utils/autodiscover.js").Utils;
 const GRIDONJS_ELEMENT_CLASS = require("./utils/autodiscover.js").GRIDONJS_ELEMENT_CLASS;
 const GRIDONJS_CONTAINER_CLASS = require("./utils/autodiscover.js").GRIDONJS_CONTAINER_CLASS;
 const Grid = require("./grid/grid.js").Grid;
-const Layout = require("./grid/layouts.js").Layout;
+
 
 class GridOnJs{
-  static get Layout(){
-    return Layout;
-  }
-  static get gridsMap(){
-    return Grid.gridsMap;
-  }
 
   static get(id){
-    return this.gridsMap.get(id);
+    return Grid.gridsMap.get(id);
   }
 
   static autodiscover(){
     ADUtils.autodiscover();
   }
+
+  static recalulatePixels(gridIds){
+    if(gridIds !== undefined){
+      let grid = null;
+      for(const id of gridIds){
+        grid = GridOnJs.get(id);
+        if(grid===undefined){
+          throw `$Grid with id:{id} does not exist`;
+        }
+        grid.recalulatePixels();
+      }
+      return;
+    }
+    const gridsMap = Grid.gridsMap;
+    for(const kv of gridsMap){
+      kv[1].recalulatePixels();
+    }
+  }
+
 }
 
 window.GridOnJs = GridOnJs;

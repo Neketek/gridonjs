@@ -44,11 +44,7 @@ var layout = {
   ]
 }
 
-function transform(){
-  GridOnJs.get("root").transform(layout);
-  GridOnJs.get("main").transform(layout32x18);
-  GridOnJs.get("login").transform(loginLayout50x50);
-  GridOnJs.get("content").transform(contentLayout20x10);
-}
-
-transform();
+GridOnJs.get("root").transform(layout);
+GridOnJs.get("main").transform(layout32x18);
+GridOnJs.get("login").transform(loginLayout50x50);
+GridOnJs.get("content").transform(contentLayout20x10);

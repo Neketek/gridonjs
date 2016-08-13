@@ -7,7 +7,7 @@ const ELEM_MAP = Symbol("ELEM_MAP");
 const DOM_ELEMENT = Symbol("DOM_ELEMENT");
 //const PSC = Symbol("PSC");
 const STATIC_GRIDS_MAP = Symbol("STATIC_GRIDS_MAP");
-const TRANSFORMS_LIST = Symbol("TRANSFORMS_LIST");
+
 
 
 class Grid{
@@ -22,7 +22,6 @@ class Grid{
   constructor(domElement,cols=10,rows=10){
     this[GRID_LAYOUT]={rows:rows,cols:cols};
     this[ELEM_MAP]=new Map();
-    this[TRANSFORMS_LIST] = new Map();
     this[DOM_ELEMENT]=domElement;
     this[Symbol.iterator]=this[ELEM_MAP][Symbol.iterator];
     Grid.gridsMap.set(domElement.id,this);
@@ -35,7 +34,7 @@ class Grid{
   get ids(){
     return this[ELEM_MAP].keys();
   }
-  
+
   get transormsList(){
     return this[TRANSFORMS_LIST];
   }
@@ -128,15 +127,6 @@ class Grid{
     }
     if(object.layout!==undefined){
       this.transformManyByParamLists(object.layout);
-    }
-  }
-
-  applyTransfromsByConditions(){
-    const transforms = this.transormsList;
-    for(const transform of transforms){
-      if(transform.condition!==undefined&&transform.condition()){
-        this.transform(transform);
-      }
     }
   }
 
