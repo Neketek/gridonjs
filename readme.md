@@ -14,7 +14,7 @@ GridOnJs is simple plugin without dependencies which gives a possibility of laco
 * Include the gridonjs.min.js file to your html page
 * In html use classes: gojs-c and gojs-e for defining grid container and
 grid element.
-* For access to plugin use functions
+* For access to plugin use
 ```javascript
  var gojs = window.GridOnJs;
 ```
