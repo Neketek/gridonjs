@@ -44,7 +44,7 @@ grid element.
 * ???
 * PROFIT!
 * If you didn't understand something (I hope it's so) you should read explanation below.
-If you think that you understood everything you need to calm down and read specification
+If you think that you understood everything, you need to calm down and read specification
 and warnings to avoid forks and issues in this repository.
 
 #### Specification:
