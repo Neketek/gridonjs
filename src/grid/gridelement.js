@@ -12,7 +12,7 @@ class GridElement{
     if(gridLayoutObject===undefined){
       return;
     }
-    const props = ["rows","cols"];
+    const props = ["rows","cols","gpLeft","gpTop","gpRight","gpBottom"];
     for(const prop of props){
       if(gridLayoutObject[prop]===undefined){
         throw `Grid layout should contain property:${prop}`;
@@ -47,11 +47,14 @@ class GridElement{
   }
 
   get rowPercents(){
-    return 100/this.layout.rows;
+    //this will calculate active grid height
+    console.log((this.layout.gpTop+this.layout.gpBottom));
+    return 100/(this.layout.rows+(this.layout.gpTop+this.layout.gpBottom));
   }
 
   get colPercents(){
-    return 100/this.layout.cols;
+    //this will calculate active grid width
+    return 100/(this.layout.cols+(this.layout.gpLeft+this.layout.gpRight));
   }
 
   set width(width){
@@ -89,7 +92,7 @@ class GridElement{
   get height(){
     return this[RECT].height;
   }
-  
+
   transform(left,top,width,height){
     this.left = left;
     this.top = top;

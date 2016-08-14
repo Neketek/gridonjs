@@ -11,20 +11,23 @@ var layout32x18 ={
   ]
 }
 
-var w = 24;
-var h = 22;
-var mt = 2;
-var ml = 2;
+
+var m = 0.02;
+
 var contentLayout20x10 = {
-  cols:80,
-  rows:50,
+  cols:3,
+  rows:2,
+  gpLeft:0.06,
+  gpRight:0.06,
+  gpTop:0.06,
+  gpBottom:0.06,
   layout:[
-    ["box-0",ml,mt,w,h],
-    ["box-1",ml*2+w,mt,w,h],
-    ["box-2",ml*2+w,mt*2+h,w,h],
-    ["box-3",ml,h+mt*2,w,h],
-    ["box-4",ml*3+w*2,mt,w,h],
-    ["box-5",ml*3+w*2,mt*2+h,w,h]
+    ["box-0",0,0,1,1,m,m],
+    ["box-1",1,0,1,1,m,m],
+    ["box-2",2,0,1,1,m,m],
+    ["box-3",0,1,1,1,m,m],
+    ["box-4",1,1,1,1,m,m],
+    ["box-5",2,1,1,1,m,m]
   ]
 };
 
