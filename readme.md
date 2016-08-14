@@ -11,25 +11,25 @@ GridOnJs is simple plugin without dependencies which gives a possibility of laco
 
 #### Installation and usage:
 
-1. Include the gridonjs.min.js file to your html page
-2. In html use classes: gojs-c and gojs-e for defining grid container and
+* Include the gridonjs.min.js file to your html page
+* In html use classes: gojs-c and gojs-e for defining grid container and
 grid element.
-3. For access to plugin use functions
+* For access to plugin use functions
 ```javascript
  var gojs = window.GridOnJs;
 ```
-4. Use autodiscover function to create Grid and GridElement objects
+* Use autodiscover function to create Grid and GridElement objects
 ```javascript
   var gojs = window.GridOnJs;
   gojs.autodiscover();
 ```
-5. To access grid object use
+* To access grid object use
 ```javascript
   var gojs = window.GridOnJs;
   gojs.autodiscover();
   var grid = gojs.get("some grid id");
 ```
-6. To set layout for the elements of the grid use
+* To set layout for the elements of the grid use
 ```javascript
   var gojs = window.GridOnJs;
   gojs.autodiscover();
@@ -41,8 +41,8 @@ grid element.
   }
   grid.transform(transformObject);
 ```
-7. ???
-8. PROFIT!
+* ???
+* PROFIT!
 
 ##### Example:
 
