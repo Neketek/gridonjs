@@ -48,7 +48,6 @@ class GridElement{
 
   get rowPercents(){
     //this will calculate active grid height
-    console.log((this.layout.gpTop+this.layout.gpBottom));
     return 100/(this.layout.rows+(this.layout.gpTop+this.layout.gpBottom));
   }
 

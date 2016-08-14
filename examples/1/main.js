@@ -1,6 +1,6 @@
 var GridOnJs = window.GridOnJs;
 GridOnJs.autodiscover();
-var layout32x18 ={
+var layoutMain ={
   rows:18,
   cols:32,
   layout:[
@@ -14,7 +14,7 @@ var layout32x18 ={
 
 var m = 0.02;
 
-var contentLayout20x10 = {
+var layoutContent = {
   cols:3,
   rows:2,
   gpLeft:0.06,
@@ -31,7 +31,7 @@ var contentLayout20x10 = {
   ]
 };
 
-var loginLayout50x50 = {
+var layoutLogin = {
   rows:50,
   cols:50,
   layout:[
@@ -39,7 +39,7 @@ var loginLayout50x50 = {
   ]
 };
 
-var layout = {
+var layoutRoot = {
   cols:1,
   rows:1,
   layout:[
@@ -47,7 +47,11 @@ var layout = {
   ]
 }
 
-GridOnJs.get("root").transform(layout);
-GridOnJs.get("main").transform(layout32x18);
-GridOnJs.get("login").transform(loginLayout50x50);
-GridOnJs.get("content").transform(contentLayout20x10);
+GridOnJs.get("root").transform(layoutRoot);
+GridOnJs.get("main").transform(layoutMain);
+GridOnJs.get("login").transform(layoutLogin);
+GridOnJs.get("content").transform(layoutContent);
+
+window.addEventListener("resize",function(){
+  GridOnJs.recalulatePixels();
+});
