@@ -50,7 +50,7 @@ and warnings to avoid forks and issues in this repository.
 #### Specification:
 Transform object
 
-* This is just JavaScript object with properties. The measurement system use
+* This is just JavaScript object with properties. The measurement system uses
 grid cell(element 1x1) to make all calculations. You can use float numbers for paddings,size and location,
 but try to not use them for grid dimensions:
   1. rows - set grid rows number.
@@ -86,13 +86,13 @@ but try to not use them for grid dimensions:
       ]
     };
   ```
-* GridOnJs object/static class has following methods
+* GridOnJs object/static class has following methods:
   1. autodiscover - will find all grids and grid elements using DOM.
   2. recalculatePixels - will resize all of grid elements relative to it's parent.
   This method can be called on certain grid object to prevent other grids from resizing.
   3. get(gridId) - will return grid object or undefined if grid is not in `Grid.gridsMap`
 
-* Grid object
+* Grid object:
   1. Grid object has every property of transform object except layout.
   2. Grid object has map interface to operate its elements, also it has [Map](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Map) iterator.
   3. Grid object has transform method which was designed to be main control method of whole object.
@@ -102,9 +102,9 @@ but try to not use them for grid dimensions:
 
 
 #### Warnings:
-1. In html all grids(containers|`class="gojs-c"`) should have unique id. In other case they will one or more of the
+1. In html all grids(containers|`class="gojs-c"`) should have unique id. In other case one or more of the
 grids with identical ids will be unaccessible via `GridOnJs.get(id)` method.
-2. In html grid element can be also a grid container but in this case its id need to be unique.
+2. In html grid element can be also a grid container, but in this case its id need to be unique.
 3. In html grid elements ids need to be unique inside the parent(container), but they can have the id of the parent
 except the situations when this element is container too.
 4. Grid(container|`class = "gojs-c"`) - has not interface of grid element. But if you want to operate with it
