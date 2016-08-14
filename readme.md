@@ -8,6 +8,17 @@
 #### Description:
 GridOnJs is simple plugin without dependencies which gives a possibility of laconic layout managment in html files.
 
+
+#### Installation:
+
+1. Include the gridonjs.min.js file to your html page
+2. In html use classes: gojs-c and gojs-e for defining grid container and
+grid element.
+3. For access to plugin use functions
+```javascript
+ var gojs = window.GridOnJs;
+ ```
+
 ##### Example:
 
 ###### css:
