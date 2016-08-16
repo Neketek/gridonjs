@@ -11,6 +11,13 @@
     "type" : "git",
      "url" : "https://github.com/Neketek/gridonjs"
   },
+  "keywords":[
+    "html",
+    "layout",
+    "plugin",
+    "grid",
+    "gojs"
+  ],
   "author": "Neketek",
   "license": "MIT",
   "devDependencies": {
