@@ -1,6 +1,6 @@
 {
   "name": "gridonjs",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "grid layout plugin",
   "main": "index.js",
   "scripts": {
