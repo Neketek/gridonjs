@@ -1,3 +1,5 @@
+"use strict";
+
 const GridElement = require("../grid/gridelement.js").GridElement;
 const Grid = require("../grid/grid.js").Grid;
 

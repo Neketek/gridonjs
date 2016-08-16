@@ -1,1 +1,1 @@
-module.exports = require("./src/gridonjs.js");
+module.exports = require("./src/gridonjs.min.js");

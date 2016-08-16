@@ -1,3 +1,5 @@
+"use strict";
+
 const PercentStyleController = require("../utils/styleControllers.js").PercentStyleController;
 const Rectangle = require("../utils/styleControllers").Rectangle;
 

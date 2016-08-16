@@ -1,3 +1,4 @@
+"use strict";
 const ADUtils = require("./utils/autodiscover.js").Utils;
 const Grid = require("./grid/grid.js").Grid;
 

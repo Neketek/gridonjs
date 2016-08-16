@@ -1,3 +1,4 @@
+"use strict";
 
 const LEFT = Symbol("LEFT");
 const TOP =  Symbol("TOP");

@@ -1,6 +1,4 @@
-const GridElement = require("./gridelement.js").GridElement;
-const PercentStyleController = require("../utils/styleControllers.js").PercentStyleController;
-
+"use strict";
 
 const GRID_LAYOUT = Symbol("GRID_LAYOUT");
 const ELEM_MAP = Symbol("ELEM_MAP");
