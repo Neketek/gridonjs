@@ -1,6 +1,4 @@
 const ADUtils = require("./utils/autodiscover.js").Utils;
-const GRIDONJS_ELEMENT_CLASS = require("./utils/autodiscover.js").GRIDONJS_ELEMENT_CLASS;
-const GRIDONJS_CONTAINER_CLASS = require("./utils/autodiscover.js").GRIDONJS_CONTAINER_CLASS;
 const Grid = require("./grid/grid.js").Grid;
 
 

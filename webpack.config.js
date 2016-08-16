@@ -2,8 +2,8 @@ var path = require('path');
 
 module.exports = {
     entry: {
-      "/build/gridonjs":"./src/gridonjs.js",
-      "/examples/gridonjs":"./src/gridonjs.js"
+      "/build/gridonjs":"./index.js",
+      "/examples/gridonjs":"./index.js"
     },
     output: {
         path:__dirname,
@@ -13,7 +13,7 @@ module.exports = {
         loaders: [
             {
               loader:"babel-loader",
-              exclude: [/(node_modules|dicomImageParser)/],
+              exclude: [/(node_modules)/],
               query:{
                 presets: ['es2015']
               }
